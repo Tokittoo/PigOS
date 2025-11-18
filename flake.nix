@@ -1,5 +1,5 @@
 {
-  description = "HyDE - HyprDots Environment";
+  description = "PigOS - HyprDots Environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -21,16 +21,16 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          hydevm = import ./Scripts/hydevm { inherit pkgs; };
+          pigosvm = import ./Scripts/pigosvm { inherit pkgs; };
         in
         {
           default = {
             type = "app";
-            program = "${hydevm.defaultPackage}/bin/hydevm";
+            program = "${pigosvm.defaultPackage}/bin/pigosvm";
           };
-          hydevm = {
+          pigosvm = {
             type = "app";
-            program = "${hydevm.defaultPackage}/bin/hydevm";
+            program = "${pigosvm.defaultPackage}/bin/pigosvm";
           };
         }
       );
@@ -39,11 +39,11 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-          hydevm = import ./Scripts/hydevm { inherit pkgs; };
+          pigosvm = import ./Scripts/pigosvm { inherit pkgs; };
         in
         {
-          default = hydevm.defaultPackage;
-          hydevm = hydevm.defaultPackage;
+          default = pigosvm.defaultPackage;
+          pigosvm = pigosvm.defaultPackage;
         }
       );
 

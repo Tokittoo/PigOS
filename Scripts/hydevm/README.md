@@ -1,8 +1,8 @@
-# HydeVM - Simplified VM Tool for HyDE Contributors
+# PigOSVM - Simplified VM Tool for PigOS Contributors
 
-HydeVM is a streamlined development tool that automatically sets up HyDE in a virtual machine for testing different branches and commits.
+PigOSVM is a streamlined development tool that automatically sets up PigOS in a virtual machine for testing different branches and commits.
 
-- [HydeVM - Simplified VM Tool for HyDE Contributors](#hydevm---simplified-vm-tool-for-hyde-contributors)
+- [PigOSVM - Simplified VM Tool for PigOS Contributors](#pigosvm---simplified-vm-tool-for-pigos-contributors)
   - [Hardware Requirements](#hardware-requirements)
   - [Features](#features)
   - [Quick Start](#quick-start)
@@ -45,8 +45,8 @@ HydeVM is a streamlined development tool that automatically sets up HyDE in a vi
 
 ## Features
 
-- **Zero Configuration**: Automatically downloads Arch Linux base image and sets up HyDE
-- **Branch Testing**: Easily test any HyDE branch or commit hash
+- **Zero Configuration**: Automatically downloads Arch Linux base image and sets up PigOS
+- **Branch Testing**: Easily test any PigOS branch or commit hash
 - **Smart Caching**: Creates cached snapshots for faster subsequent runs (uses XDG cache directory)
 - **Optional Persistence**: Choose whether changes should be saved or discarded
 - **OS Detection**: Automatically detects your OS and handles dependencies appropriately

@@ -5,8 +5,8 @@
 
 let
   # Import the unified shell script
-  hydevmScript = pkgs.writeShellApplication {
-    name = "hydevm";
+  pigosvmScript = pkgs.writeShellApplication {
+    name = "pigosvm";
     runtimeInputs = with pkgs; [
       qemu
       curl
@@ -17,23 +17,23 @@ let
       gnused
       gawk
     ];
-    text = builtins.readFile ./hydevm.sh;
+    text = builtins.readFile ./pigosvm.sh;
   };
 in
 {
-  defaultPackage = hydevmScript;
+  defaultPackage = pigosvmScript;
 
-  mkHydeVM =
+  mkPigOSVM =
     {
       memory ? "4G",
       cpus ? 2,
       extraArgs ? "",
     }:
     pkgs.writeShellApplication {
-      name = "run-hydevm";
-      runtimeInputs = [ hydevmScript ];
+      name = "run-pigosvm";
+      runtimeInputs = [ pigosvmScript ];
       text = ''
-        VM_MEMORY="${memory}" VM_CPUS="${toString cpus}" VM_EXTRA_ARGS="${extraArgs}" hydevm "$@"
+        VM_MEMORY="${memory}" VM_CPUS="${toString cpus}" VM_EXTRA_ARGS="${extraArgs}" pigosvm "$@"
       '';
     };
 }

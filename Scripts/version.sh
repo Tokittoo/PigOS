@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-HYDE_CLONE_PATH=$(git rev-parse --show-toplevel)
-HYDE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-HYDE_REMOTE=$(git config --get remote.origin.url)
-HYDE_VERSION=$(git describe --tags --always)
-HYDE_COMMIT_HASH=$(git rev-parse HEAD)
-HYDE_VERSION_COMMIT_MSG=$(git log -1 --pretty=%B)
-HYDE_VERSION_LAST_CHECKED=$(date +%Y-%m-%d\ %H:%M%S\ %z)
+PIGOS_CLONE_PATH=$(git rev-parse --show-toplevel)
+PIGOS_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+PIGOS_REMOTE=$(git config --get remote.origin.url)
+PIGOS_VERSION=$(git describe --tags --always)
+PIGOS_COMMIT_HASH=$(git rev-parse HEAD)
+PIGOS_VERSION_COMMIT_MSG=$(git log -1 --pretty=%B)
+PIGOS_VERSION_LAST_CHECKED=$(date +%Y-%m-%d\ %H:%M%S\ %z)
 
 generate_release_notes() {
   local latest_tag
@@ -31,33 +31,33 @@ generate_release_notes() {
   echo "$commits"
 }
 
-# HYDE_RELEASE_NOTES=$(generate_release_notes)
+# PIGOS_RELEASE_NOTES=$(generate_release_notes)
 
-echo "HyDE $HYDE_VERSION built from branch $HYDE_BRANCH at commit ${HYDE_COMMIT_HASH:0:12} ($HYDE_VERSION_COMMIT_MSG)"
-echo "Date: $HYDE_VERSION_LAST_CHECKED"
-echo "Repository: $HYDE_CLONE_PATH"
-echo "Remote: $HYDE_REMOTE"
+echo "PigOS $PIGOS_VERSION built from branch $PIGOS_BRANCH at commit ${PIGOS_COMMIT_HASH:0:12} ($PIGOS_VERSION_COMMIT_MSG)"
+echo "Date: $PIGOS_VERSION_LAST_CHECKED"
+echo "Repository: $PIGOS_CLONE_PATH"
+echo "Remote: $PIGOS_REMOTE"
 echo ""
 
 if [[ "$1" == "--cache" ]]; then
-  state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/hyde"
+  state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/pigos"
   mkdir -p "$state_dir"
   version_file="$state_dir/version"
 
   cat >"$version_file" <<EOL
-HYDE_CLONE_PATH='$HYDE_CLONE_PATH'
-HYDE_BRANCH='$HYDE_BRANCH'
-HYDE_REMOTE='$HYDE_REMOTE'
-HYDE_VERSION='$HYDE_VERSION'
-HYDE_VERSION_LAST_CHECKED='$HYDE_VERSION_LAST_CHECKED'
-HYDE_VERSION_COMMIT_MSG='$HYDE_VERSION_COMMIT_MSG'
-HYDE_COMMIT_HASH='$HYDE_COMMIT_HASH'
+PIGOS_CLONE_PATH='$PIGOS_CLONE_PATH'
+PIGOS_BRANCH='$PIGOS_BRANCH'
+PIGOS_REMOTE='$PIGOS_REMOTE'
+PIGOS_VERSION='$PIGOS_VERSION'
+PIGOS_VERSION_LAST_CHECKED='$PIGOS_VERSION_LAST_CHECKED'
+PIGOS_VERSION_COMMIT_MSG='$PIGOS_VERSION_COMMIT_MSG'
+PIGOS_COMMIT_HASH='$PIGOS_COMMIT_HASH'
 EOL
-# HYDE_RELEASE_NOTES='$HYDE_RELEASE_NOTES'
+# PIGOS_RELEASE_NOTES='$PIGOS_RELEASE_NOTES'
 
   echo -e "Version cache output to $version_file\n"
 
 elif [[ "$1" == "--release-notes" ]]; then
-  echo "$HYDE_RELEASE_NOTES"
+  echo "$PIGOS_RELEASE_NOTES"
 
 fi

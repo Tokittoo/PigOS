@@ -1,13 +1,13 @@
 <div align = center>
   
 <a href="https://discord.gg/AYbJ9MJez7">
-    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=PigOS%20Project&labelColor=ebbcba&color=c79bf0">
   </a>
 </div>
 
 ###### _<div align="right"><a id=-design-by-t2></a><sub>// design by t2</sub></div>_
 
-![hyde_banner](Source/assets/hyde_banner.png)
+![pigos_banner](Source/assets/pigos_banner.png)
 
 <!--
 Multi-language README support
@@ -51,7 +51,7 @@ Multi-language README support
 </div>
 
 Check this out for the full note:
-[Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
+[Journey to PigOS and beyond](./Hyprdots-to-HyDE.md)
 
 <!--
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
@@ -69,7 +69,7 @@ Check this out for the full note:
 ---
 
 The installation script is designed for a minimal [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) install, but **may** work on some [Arch-based distros](https://wiki.archlinux.org/title/Arch-based_distributions).
-While installing HyDE alongside another [DE](https://wiki.archlinux.org/title/Desktop_environment)/[WM](https://wiki.archlinux.org/title/Window_manager) should work, due to it being a heavily customized setup, it **will** conflict with your [GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) theming, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB), etc. and is at your own risk.
+While installing PigOS alongside another [DE](https://wiki.archlinux.org/title/Desktop_environment)/[WM](https://wiki.archlinux.org/title/Window_manager) should work, due to it being a heavily customized setup, it **will** conflict with your [GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) theming, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB), etc. and is at your own risk.
 
 For NixOS support there is a separate project being maintained @ [Hydenix](https://github.com/richen604/hydenix/tree/main)
 
@@ -84,13 +84,13 @@ To install, execute the following commands:
 
 ```shell
 sudo pacman -S --needed git base-devel
-git clone --depth 1 https://github.com/HyDE-Project/HyDE ~/HyDE
-cd ~/HyDE/Scripts
+git clone --depth 1 https://github.com/YOUR-ORG/PigOS ~/PigOS
+cd ~/PigOS/Scripts
 ./install.sh
 ```
 
 > [!TIP]
-> You can also add any other apps you wish to install alongside HyDE to `Scripts/pkg_user.lst` and pass the file as a parameter to install it like so:
+> You can also add any other apps you wish to install alongside PigOS to `Scripts/pkg_user.lst` and pass the file as a parameter to install it like so:
 >
 > ```shell
 > ./install.sh pkg_user.lst
@@ -107,7 +107,7 @@ View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com
 -->
 
 Please reboot after the install script completes and takes you to the SDDM login screen (or black screen) for the first time.
-For more details, please refer to the [installation wiki](https://github.com/HyDE-Project/HyDE/wiki/installation).
+For more details, please refer to the [installation wiki](https://github.com/YOUR-ORG/PigOS/wiki/installation).
 
 <div align="right">
   <br>
@@ -131,7 +131,7 @@ We welcome contributions from the community! To get started:
 - Review our release process in [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - Add yourself to [CONTRIBUTORS.md](CONTRIBUTORS.md) when making your first PR
 
-Whether you're helping with code, testing, or documentation, we appreciate your support in making HyDE better for everyone. Thank you!
+Whether you're helping with code, testing, or documentation, we appreciate your support in making PigOS better for everyone. Thank you!
 
 <div align="right">
   <br>
@@ -143,10 +143,10 @@ Whether you're helping with code, testing, or documentation, we appreciate your 
 
 ---
 
-To update HyDE, you will need to pull the latest changes from GitHub and restore the configs by running the following commands:
+To update PigOS, you will need to pull the latest changes from GitHub and restore the configs by running the following commands:
 
 ```shell
-cd ~/HyDE/Scripts
+cd ~/PigOS/Scripts
 git pull origin master
 ./install.sh -r
 ```
@@ -165,12 +165,12 @@ For more details, you can refer to [Hyde-cli - dots management wiki](https://git
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
 
-<a id="hydevm"></a>
-<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=HYDEVM" width="450"/>
+<a id="pigosvm"></a>
+<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=PIGOSVM" width="450"/>
 
 ---
 
-HyDEVM is a script that allows you to run HyDE in a virtual machine for testing and development.
+PigOSVM is a script that allows you to run PigOS in a virtual machine for testing and development.
 
 ## Quick Start
 
@@ -178,22 +178,22 @@ HyDEVM is a script that allows you to run HyDE in a virtual machine for testing 
 
 ```bash
 # Download and run (will auto-detect missing packages)
-curl -L https://raw.githubusercontent.com/HyDE-Project/HyDE/main/Scripts/hydevm/hydevm.sh -o hydevm
-chmod +x hydevm
-./hydevm
+curl -L https://raw.githubusercontent.com/YOUR-ORG/PigOS/main/Scripts/pigosvm/pigosvm.sh -o pigosvm
+chmod +x pigosvm
+./pigosvm
 ```
 
 ### NixOS (or Nix)
 
 ```bash
-# Using flakes from HyDE repository
-nix run github:HyDE-Project/HyDE
+# Using flakes from PigOS repository
+nix run github:YOUR-ORG/PigOS
 
 # Or if you have the repository cloned locally
 nix run .
 ```
 
-For more details, please refer to the [HyDEVM README](Scripts/hydevm/README.md).
+For more details, please refer to the [PigOSVM README](Scripts/pigosvm/README.md).
 
 <div align="right">
   <br>
@@ -206,7 +206,7 @@ For more details, please refer to the [HyDEVM README](Scripts/hydevm/README.md).
 ---
 
 All our official themes are stored in a separate repository, allowing users to install them using themepatcher.
-For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-Project/hyde-themes).
+For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-Project/hyde-themes) (external repository - maintained by HyDE Project).
 
 <div align="center">
   <table><tr><td>
@@ -230,7 +230,7 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
 > [!TIP]
 > Everyone, including you can create, maintain, and share additional themes, all of which can be installed using themepatcher!
 > To create your own custom theme, please refer to the [theming wiki](https://github.com/prasanthrangan/hyprdots/wiki/Theming).
-> If you wish to have your hyde theme showcased, or you want to find some non-official themes, visit [kRHYME7/hyde-gallery](https://github.com/kRHYME7/hyde-gallery)!
+> If you wish to have your theme showcased, or you want to find some non-official themes, visit [kRHYME7/hyde-gallery](https://github.com/kRHYME7/hyde-gallery) (external repository)!
 
 <div align="right">
   <br>
@@ -288,11 +288,11 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
 
 ---
 
-<a href="https://star-history.com/#hyde-project/hyde&hyde-project/hyde-gallery&hyde-project/hyde-themes&Timeline">
+<a href="https://star-history.com/#YOUR-ORG/pigos&hyde-project/hyde-gallery&hyde-project/hyde-themes&Timeline">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=YOUR-ORG/pigos&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=YOUR-ORG/pigos&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=YOUR-ORG/pigos&type=Timeline" />
  </picture>
 </a>
 
@@ -340,3 +340,24 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+---
+
+## Attribution
+
+**PigOS** is a fork of **HyDE** (HyprDots Environment), originally created by the HyDE Project team.
+
+### Original Project
+
+- **Original Name:** HyDE (HyprDots Environment)
+- **Original Repository:** [HyDE-Project/HyDE](https://github.com/HyDE-Project/HyDE)
+- **License:** GNU General Public License v3.0 (GPL-3.0)
+- **Original License:** See [LICENSE](LICENSE) file
+
+### What Changed
+
+This fork has been renamed from HyDE to PigOS. All project references, documentation, and code have been updated to reflect the new name while preserving the original functionality and structure. The original license and copyright notices have been preserved.
+
+### Credits
+
+We extend our gratitude to the original HyDE Project contributors and maintainers for their excellent work. This project would not exist without their efforts.
