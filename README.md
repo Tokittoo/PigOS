@@ -107,7 +107,7 @@ View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com
 -->
 
 Please reboot after the install script completes and takes you to the SDDM login screen (or black screen) for the first time.
-For more details, please refer to the [installation wiki](https://github.com/YOUR-ORG/PigOS/wiki/installation).
+For more details, please refer to the [installation wiki](https://github.com/tokittoo/PigOS/wiki/installation).
 
 <div align="right">
   <br>
