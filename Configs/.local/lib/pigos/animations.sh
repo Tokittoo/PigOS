@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# shellcheck source=$HOME/.local/bin/hyde-shell
+# shellcheck source=$HOME/.local/bin/pigos-shell
 # shellcheck disable=SC1091
-if ! source "$(which hyde-shell)"; then
-    echo "[$0] :: Error: hyde-shell not found."
-    echo "[$0] :: Is HyDE installed?"
+if ! source "$(which pigos-shell)"; then
+    echo "[$0] :: Error: pigos-shell not found."
+    echo "[$0] :: Is PigOS installed?"
     exit 1
 fi
 

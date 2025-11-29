@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-[[ "${HYDE_SHELL_INIT}" -ne 1 ]] && eval "$(hyde-shell init)"
+[[ "${PIGOS_SHELL_INIT}" -ne 1 ]] && eval "$(pigos-shell init)"
 
 # Declare an associative array for special cases
 declare -A dict

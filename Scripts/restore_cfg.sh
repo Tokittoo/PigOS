@@ -2,7 +2,7 @@
 # shellcheck disable=SC2154
 # shellcheck disable=SC1091
 #|---/ /+--------------------------------+---/ /|#
-#|--/ /-| Script to restore hyde configs |--/ /-|#
+#|--/ /-| Script to restore pigos configs |--/ /-|#
 #|-/ /--| Prasanth Rangan                |-/ /--|#
 #|/ /---+--------------------------------+/ /---|#
 
@@ -171,24 +171,24 @@ deploy_psv() {
 
 hyprland_hook() {
 
-    local hyde_config="${cloneDir}/Configs/.config/hypr/hyprland.conf"
+    local pigos_config="${cloneDir}/Configs/.config/hypr/hyprland.conf"
     local hyprland_default_config="${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprland.conf"
-    local hyq_exec="${cloneDir}/Configs/.local/lib/hyde/hyq"
+    local hyq_exec="${cloneDir}/Configs/.local/lib/pigos/hyq"
     if [[ ! -x "${hyq_exec}" ]]; then
         print_log -r "[error] :: " "Required executable '${hyq_exec}' not found or not executable. Please ensure it exists and has execute permissions."
         return 1
     fi
-    if ! "${hyq_exec}" "${hyprland_default_config}" --query "\$HYDE_HYPRLAND"; then
+    if ! "${hyq_exec}" "${hyprland_default_config}" --query "\$PIGOS_HYPRLAND"; then
         mkdir -p "$(dirname "${hyprland_default_config}")" "${BkpDir}/.config/hypr"
-        print_log -g "[hook] " -b "hyprland :: " "No HYDE_HYPRLAND variable found in ${hyprland_default_config}, restoring default HyDE marker..."
+        print_log -g "[hook] " -b "hyprland :: " "No PIGOS_HYPRLAND variable found in ${hyprland_default_config}, restoring default PigOS marker..."
 
         if [[ ${flg_DryRun} -ne 1 && -f "${hyprland_default_config}" ]]; then
             cp -f "${hyprland_default_config}" "${BkpDir}/.config/hypr/hyprland.conf"
         fi
 
         print_log -r "[backup] :: " "${hyprland_default_config} to ${BkpDir}/.config/hypr/hyprland.conf"
-        [[ ${flg_DryRun} -ne 1 ]] && cp -f "${hyde_config}" "${hyprland_default_config}"
-        print_log -g "[restore] :: " "${hyde_config} to ${hyprland_default_config}"
+        [[ ${flg_DryRun} -ne 1 ]] && cp -f "${pigos_config}" "${hyprland_default_config}"
+        print_log -g "[restore] :: " "${pigos_config} to ${hyprland_default_config}"
     fi
 }
 
@@ -243,16 +243,16 @@ echo ""
 
 hyprland_hook
 
-print_log -g "[python env]" -b " :: " "Rebuilding HyDE Python environment..."
-if command -v hyde-shell >/dev/null 2>&1; then
-    hyde-shell pyinit
+print_log -g "[python env]" -b " :: " "Rebuilding PigOS Python environment..."
+if command -v pigos-shell >/dev/null 2>&1; then
+    pigos-shell pyinit
 else
-    "${HOME}/.local/bin/hyde-shell" pyinit
+    "${HOME}/.local/bin/pigos-shell" pyinit
 fi
 
 print_log -g "[version]" -b " :: " "saving version info..."
 "${scrDir}/version.sh" --cache || echo "Failed to save version info."
 
-state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/hyde"
-clone_dir=$(git rev-parse --show-toplevel 2>/dev/null || echo "${HOME}/HyDE")
+state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/pigos"
+clone_dir=$(git rev-parse --show-toplevel 2>/dev/null || echo "${HOME}/PigOS")
 [[ -f ${clone_dir}/CHANGELOG.md ]] && cp -f "${clone_dir}/CHANGELOG.md" "${state_dir}/CHANGELOG.md"

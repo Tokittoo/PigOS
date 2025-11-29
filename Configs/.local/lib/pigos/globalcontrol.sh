@@ -10,24 +10,24 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
 # ! export XDG_DATA_DIRS="$XDG_DATA_HOME/hyde:/usr/local/share/hyde/:/usr/share/hyde/:$XDG_DATA_DIRS" # Causes issues https://github.com/HyDE-Project/HyDE/issues/308#issuecomment-2691229673
 
-# hyde envs
-export HYDE_CONFIG_HOME="${XDG_CONFIG_HOME}/hyde"
-export HYDE_DATA_HOME="${XDG_DATA_HOME}/hyde"
-export HYDE_CACHE_HOME="${XDG_CACHE_HOME}/hyde"
-export HYDE_STATE_HOME="${XDG_STATE_HOME}/hyde"
-export HYDE_RUNTIME_DIR="${XDG_RUNTIME_DIR}/hyde"
+# pigos envs
+export PIGOS_CONFIG_HOME="${XDG_CONFIG_HOME}/pigos"
+export PIGOS_DATA_HOME="${XDG_DATA_HOME}/pigos"
+export PIGOS_CACHE_HOME="${XDG_CACHE_HOME}/pigos"
+export PIGOS_STATE_HOME="${XDG_STATE_HOME}/pigos"
+export PIGOS_RUNTIME_DIR="${XDG_RUNTIME_DIR}/pigos"
 export ICONS_DIR="${XDG_DATA_HOME}/icons"
 export FONTS_DIR="${XDG_DATA_HOME}/fonts"
 export THEMES_DIR="${XDG_DATA_HOME}/themes"
 
-#legacy hyde envs // should be deprecated
+#legacy pigos envs // should be deprecated
 
-export scrDir="${LIB_DIR:-$HOME/.local/lib}/hyde"
+export scrDir="${LIB_DIR:-$HOME/.local/lib}/pigos"
 export confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
-export hydeConfDir="$HYDE_CONFIG_HOME"
-export cacheDir="$HYDE_CACHE_HOME"
-export thmbDir="$HYDE_CACHE_HOME/thumbs"
-export dcolDir="$HYDE_CACHE_HOME/dcols"
+export pigosConfDir="$PIGOS_CONFIG_HOME"
+export cacheDir="$PIGOS_CACHE_HOME"
+export thmbDir="$PIGOS_CACHE_HOME/thumbs"
+export dcolDir="$PIGOS_CACHE_HOME/dcols"
 export iconsDir="$ICONS_DIR"
 export themesDir="$THEMES_DIR"
 export fontsDir="$FONTS_DIR"
@@ -198,7 +198,7 @@ get_hashmap() {
 
     # Notify the list of directories without compatible wallpapers
     if [ "${#no_wallpapers[@]}" -gt 0 ]; then
-        # [ -n "${no_notify}" ] && notify-send -a "HyDE Alert" "WARNING: No compatible wallpapers found in: ${no_wallpapers[*]}"
+        # [ -n "${no_notify}" ] && notify-send -a "PigOS Alert" "WARNING: No compatible wallpapers found in: ${no_wallpapers[*]}"
         print_log -warn "No compatible wallpapers found in:" "${no_wallpapers[*]}"
     fi
 
@@ -207,7 +207,7 @@ get_hashmap() {
             return 1
         else
             echo "ERROR: No image found in any source"
-            [ -n "${no_notify}" ] && notify-send -a "HyDE Alert" "WARNING: No compatible wallpapers found in: ${no_wallpapers[*]}"
+            [ -n "${no_notify}" ] && notify-send -a "PigOS Alert" "WARNING: No compatible wallpapers found in: ${no_wallpapers[*]}"
             exit 1
         fi
     fi
@@ -240,7 +240,7 @@ get_themes() {
         [ -f "${thmDir}/.sort" ] && thmSortS+=("$(head -1 "${thmDir}/.sort")") || thmSortS+=("0")
         thmWallS+=("${realWallPath}")
         thmListS+=("${thmDir##*/}") # Use this instead of basename
-    done < <(find -H "${HYDE_CONFIG_HOME}/themes" -mindepth 1 -maxdepth 1 -type d)
+    done < <(find -H "${PIGOS_CONFIG_HOME}/themes" -mindepth 1 -maxdepth 1 -type d)
 
     while IFS='|' read -r sort theme wall; do
         thmSort+=("${sort}")
@@ -256,54 +256,54 @@ get_themes() {
     fi
 }
 
-export_hyde_config() {
+export_pigos_config() {
     #? This function is used to re-source config files if
     #? 1. they change since the script was started
     #? 2. the script is run in a new shell instance
-    #? This function is used to re-source HyDE config files in the following scenarios:
+    #? This function is used to re-source PigOS config files in the following scenarios:
     #? 1. If the config files change since the script was started (e.g., another process or user updates theme or state).
-    #?    Example: You edit your theme or state config while this script is running; call export_hyde_config to reload changes.
+    #?    Example: You edit your theme or state config while this script is running; call export_pigos_config to reload changes.
     #? 2. If the script is run in a new shell instance (e.g., after opening a new terminal or sourcing this script in a subshell).
-    #?    Example: You start a new shell session and want to ensure the latest config is loaded; call export_hyde_config at the start.
+    #?    Example: You start a new shell session and want to ensure the latest config is loaded; call export_pigos_config at the start.
     #? 3. If you need arrays from the config to be available in the current shell session (since bash does not export arrays).
-    #?    Example: You want to use theme or wall arrays in your shell; call export_hyde_config to populate them.
+    #?    Example: You want to use theme or wall arrays in your shell; call export_pigos_config to populate them.
     #? 
-    #? Usage: Call export_hyde_config whenever you need to ensure the current shell has up-to-date config and arrays.
+    #? Usage: Call export_pigos_config whenever you need to ensure the current shell has up-to-date config and arrays.
     #? Typically called after config changes, at shell startup, or before using config-dependent arrays.
 
-    local user_conf_state="${XDG_STATE_HOME}/hyde/staterc"
-    local user_conf="${XDG_STATE_HOME}/hyde/config"
+    local user_conf_state="${XDG_STATE_HOME}/pigos/staterc"
+    local user_conf="${XDG_STATE_HOME}/pigos/config"
 
     [ -f "${user_conf_state}" ] && source "${user_conf_state}"
     [ -f "${user_conf}" ] && source "${user_conf}"
 }
 
-export_hyde_config
+export_pigos_config
 
 case "${enableWallDcol}" in
 0 | 1 | 2 | 3) ;;
 *) enableWallDcol=0 ;;
 esac
 
-if [ -z "${HYDE_THEME}" ] || [ ! -d "${HYDE_CONFIG_HOME}/themes/${HYDE_THEME}" ]; then
+if [ -z "${PIGOS_THEME}" ] || [ ! -d "${PIGOS_CONFIG_HOME}/themes/${PIGOS_THEME}" ]; then
     get_themes
-    HYDE_THEME="${thmList[0]}"
+    PIGOS_THEME="${thmList[0]}"
 fi
 
-HYDE_THEME_DIR="${HYDE_CONFIG_HOME}/themes/${HYDE_THEME}"
+PIGOS_THEME_DIR="${PIGOS_CONFIG_HOME}/themes/${PIGOS_THEME}"
 WALLBASH_DIRS=(
     "${XDG_CONFIG_HOME}/wallbash"
-    "${XDG_CONFIG_HOME}/hyde/wallbash"
+    "${XDG_CONFIG_HOME}/pigos/wallbash"
     "${XDG_DATA_HOME}/wallbash"
-    "${XDG_DATA_HOME}/hyde/wallbash"
-    "/usr/local/share/hyde/wallbash"
-    "/usr/share/hyde/wallbash"
+    "${XDG_DATA_HOME}/pigos/wallbash"
+    "/usr/local/share/pigos/wallbash"
+    "/usr/share/pigos/wallbash"
 )
 
 wallbashDirs=("${WALLBASH_DIRS[@]}")
 
-export HYDE_THEME \
-    HYDE_THEME_DIR \
+export PIGOS_THEME \
+    PIGOS_THEME_DIR \
     WALLBASH_DIRS \
     wallbashDirs \
     enableWallDcol
@@ -314,8 +314,8 @@ if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
     hypr_border="$(hyprctl -j getoption decoration:rounding | jq '.int')"
     hypr_width="$(hyprctl -j getoption general:border_size | jq '.int')"
 fi
-export hypr_border=${hypr_border:-${HYDE_BORDER_RADIUS:-2}}
-export hypr_width=${hypr_width:-${HYDE_BORDER_WIDTH:-2}}
+export hypr_border=${hypr_border:-${PIGOS_BORDER_RADIUS:-2}}
+export hypr_width=${hypr_width:-${PIGOS_BORDER_WIDTH:-2}}
 
 #// extra fns
 
@@ -325,7 +325,7 @@ pkg_installed() {
         return 0
     elif command -v "flatpak" &>/dev/null && flatpak info "${pkgIn}" &>/dev/null; then
         return 0
-    elif hyde-shell pm.sh pq "${pkgIn}" &>/dev/null; then
+    elif pigos-shell pm.sh pq "${pkgIn}" &>/dev/null; then
         return 0
     else
         return 1
@@ -344,12 +344,12 @@ get_aurhlpr() {
 set_conf() {
     local varName="${1}"
     local varData="${2}"
-    touch "${XDG_STATE_HOME}/hyde/staterc"
+    touch "${XDG_STATE_HOME}/pigos/staterc"
 
-    if [ "$(grep -c "^${varName}=" "${XDG_STATE_HOME}/hyde/staterc")" -eq 1 ]; then
-        sed -i "/^${varName}=/c${varName}=\"${varData}\"" "${XDG_STATE_HOME}/hyde/staterc"
+    if [ "$(grep -c "^${varName}=" "${XDG_STATE_HOME}/pigos/staterc")" -eq 1 ]; then
+        sed -i "/^${varName}=/c${varName}=\"${varData}\"" "${XDG_STATE_HOME}/pigos/staterc"
     else
-        echo "${varName}=\"${varData}\"" >>"${XDG_STATE_HOME}/hyde/staterc"
+        echo "${varName}=\"${varData}\"" >>"${XDG_STATE_HOME}/pigos/staterc"
     fi
 }
 
@@ -360,8 +360,8 @@ set_hash() {
 
 check_package() {
 
-    local lock_file="${XDG_RUNTIME_DIR:-/tmp}/hyde/__package.lock"
-    mkdir -p "${XDG_RUNTIME_DIR:-/tmp}/hyde"
+    local lock_file="${XDG_RUNTIME_DIR:-/tmp}/pigos/__package.lock"
+    mkdir -p "${XDG_RUNTIME_DIR:-/tmp}/pigos"
 
     if [ -f "$lock_file" ]; then
         return 0
@@ -381,7 +381,7 @@ check_package() {
 # Yes this is so slow but it's the only way to ensure that parsing behaves correctly
 get_hyprConf() {
     local hyVar="${1}"
-    local file="${2:-"$HYDE_THEME_DIR/hypr.theme"}"
+    local file="${2:-"$PIGOS_THEME_DIR/hypr.theme"}"
 
     # First try using hyq for fast config parsing if available
     if command -v hyq &>/dev/null; then
@@ -428,12 +428,12 @@ get_hyprConf() {
         "SDDM_THEME") echo "" ;;
         *)
             grep "^[[:space:]]*\$default.${hyVar}\s*=" \
-                "XDG_DATA_HOME/hyde/hyde.conf" \
-                "$XDG_DATA_HOME/hyde/hyprland.conf" \
-                "/usr/local/share/hyde/hyde.conf" \
-                "/usr/local/share/hyde/hyprland.conf" \
-                "/usr/share/hyde/hyde.conf" \
-                "/usr/share/hyde/hyprland.conf" 2>/dev/null |
+                "XDG_DATA_HOME/pigos/pigos.conf" \
+                "$XDG_DATA_HOME/pigos/hyprland.conf" \
+                "/usr/local/share/pigos/pigos.conf" \
+                "/usr/local/share/pigos/hyprland.conf" \
+                "/usr/share/pigos/pigos.conf" \
+                "/usr/share/pigos/hyprland.conf" 2>/dev/null |
                 cut -d '=' -f2 | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' | head -n 1
             ;;
         esac
@@ -480,7 +480,7 @@ get_rofi_pos() {
 paste_string() {
     if ! command -v wtype >/dev/null; then exit 0; fi
     if [ -t 1 ]; then return 0; fi
-    ignore_paste_file="$HYDE_STATE_HOME/ignore.paste"
+    ignore_paste_file="$PIGOS_STATE_HOME/ignore.paste"
 
     if [[ ! -e "${ignore_paste_file}" ]]; then
         cat <<EOF >"${ignore_paste_file}"
@@ -556,7 +556,7 @@ accepted_mime_types() {
             return 0
         else
             print_log -err "File type not supported for this wallpaper backend."
-            notify-send -u critical -a "HyDE-Alert" "File type not supported for this wallpaper backend."
+            notify-send -u critical -a "PigOS-Alert" "File type not supported for this wallpaper backend."
         fi
 
     done
@@ -581,4 +581,4 @@ export -f get_hyprConf get_rofi_pos \
     pkg_installed paste_string \
     extract_thumbnail accepted_mime_types \
     dconf_write send_notifs \
-    export_hyde_config
+    export_pigos_config

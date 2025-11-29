@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# HydeVM - Simplified VM tool for HyDE contributors
+# PigOSVM - Simplified VM tool for PigOS contributors
 # Works on both Arch Linux and NixOS with automatic OS detection
 
 set -e
 
 # Configuration
-CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/hydevm"
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/pigosvm"
 BASE_IMAGE="$CACHE_DIR/archbase.qcow2"
 SNAPSHOTS_DIR="$CACHE_DIR/snapshots"
-HYDE_REPO="https://github.com/HyDE-Project/HyDE.git"
+PIGOS_REPO="https://github.com/PigOS-Project/PigOS.git"
 # Required packages for Arch Linux
 ARCH_PACKAGES=(
     "qemu-desktop"
@@ -42,10 +42,10 @@ function detect_os() {
 }
 
 function print_usage() {
-    echo "HydeVM - Simplified VM tool for HyDE contributors"
+    echo "PigOSVM - Simplified VM tool for PigOS contributors"
     echo "Supports: Arch Linux, NixOS"
     echo ""
-    echo "Usage: hydevm [OPTIONS] [BRANCH/COMMIT]"
+    echo "Usage: pigosvm [OPTIONS] [BRANCH/COMMIT]"
     echo ""
     echo "Arguments:"
     echo "  BRANCH/COMMIT            Git branch or commit hash (default: master)"
@@ -65,11 +65,11 @@ function print_usage() {
     echo "  VM_QEMU_OVERRIDE=\"cmd\"   Override entire QEMU command (\$VM_DISK substituted)"
     echo ""
     echo "Examples:"
-    echo "  hydevm                  # Run master branch"
-    echo "  hydevm --persist        # Run master branch (persistent)"
-    echo "  hydevm feature-branch   # Run specific branch"
-    echo "  hydevm abc123           # Run specific commit"
-    echo "  hydevm --persist dev    # Run dev branch with persistence"
+    echo "  pigosvm                  # Run master branch"
+    echo "  pigosvm --persist        # Run master branch (persistent)"
+    echo "  pigosvm feature-branch   # Run specific branch"
+    echo "  pigosvm abc123           # Run specific commit"
+    echo "  pigosvm --persist dev    # Run dev branch with persistence"
     echo ""
     echo "OS-specific notes:"
     echo "  Arch Linux: Missing packages will be auto-detected and offered for install"
@@ -202,7 +202,7 @@ function install_all_arch_dependencies() {
         exit 1
     fi
 
-    echo "📦 Installing all HydeVM dependencies..."
+    echo "📦 Installing all PigOSVM dependencies..."
     install_arch_packages "${ARCH_PACKAGES[@]}"
     echo "💡 You may need to reboot or logout/login for all changes to take effect"
 }
@@ -210,7 +210,7 @@ function install_all_arch_dependencies() {
 function check_deps_only() {
     local os
     os=$(detect_os)
-    echo "🔍 Checking HydeVM dependencies..."
+    echo "🔍 Checking PigOSVM dependencies..."
     echo "   Detected OS: $os"
 
     if check_dependencies; then
@@ -331,11 +331,11 @@ function get_snapshot_name() {
     fi
 }
 
-function create_hyde_snapshot() {
+function create_pigos_snapshot() {
     local ref="${1:-master}"
     local snapshot_name
     snapshot_name=$(get_snapshot_name "$ref")
-    local snapshot_path="$SNAPSHOTS_DIR/hyde-$snapshot_name.qcow2"
+    local snapshot_path="$SNAPSHOTS_DIR/pigos-$snapshot_name.qcow2"
     local qemu_cmd
     qemu_cmd=$(get_qemu_command)
     local python_cmd
@@ -347,7 +347,7 @@ function create_hyde_snapshot() {
         return 0
     fi
 
-    echo "🔨 Creating HyDE snapshot for '$ref'..."
+    echo "🔨 Creating PigOS snapshot for '$ref'..."
 
     # Create temporary VM image for setup
     local temp_image="$CACHE_DIR/temp-setup.qcow2"
@@ -359,11 +359,11 @@ function create_hyde_snapshot() {
 #!/bin/bash
 set -e
 
-echo "🚀 Setting up HyDE environment for branch/commit: $ref"
+echo "🚀 Setting up PigOS environment for branch/commit: $ref"
 
 # Set root password for convenience
 echo "🔐 Setting root password..."
-echo -e "hydevm\nhydevm" | sudo passwd root
+echo -e "pigosvm\npigosvm" | sudo passwd root
 
 # Update system and install dependencies
 echo "📦 Updating system and installing dependencies..."
@@ -377,17 +377,17 @@ sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/s
 sudo systemctl enable sshd
 
 # Clone or update HyDE repository
-echo "📥 Setting up HyDE repository..."
+echo "📥 Setting up PigOS repository..."
 cd /home/arch
 if [ -d "HyDE" ]; then
-    echo "   HyDE directory exists, updating..."
-    cd HyDE
+    echo "   PigOS directory exists, updating..."
+    cd PigOS
     git fetch origin
     git reset --hard HEAD  # Reset any local changes
 else
-    echo "   Cloning HyDE repository..."
-    git clone "$HYDE_REPO" HyDE
-    cd HyDE
+    echo "   Cloning PigOS repository..."
+    git clone "$PIGOS_REPO" PigOS
+    cd PigOS
 fi
 
 # Checkout specific branch/commit if provided
@@ -412,18 +412,18 @@ else
 fi
 
 echo ""
-echo "🎨 HyDE repository ready!"
+echo "🎨 PigOS repository ready!"
 
-# Check if HyDE is already installed
-if [ -f "/home/arch/.config/hypr/hyprland.conf" ] && [ -f "/home/arch/.config/hyde/hyde.conf" ]; then
-    echo "⚠️  HyDE appears to already be installed."
+# Check if PigOS is already installed
+if [ -f "/home/arch/.config/hypr/hyprland.conf" ] && [ -f "/home/arch/.config/pigos/pigos.conf" ]; then
+    echo "⚠️  PigOS appears to already be installed."
     echo "   Configuration files found. Skipping installation."
-    echo "   If you want to reinstall, remove ~/.config/hypr and ~/.config/hyde first."
+    echo "   If you want to reinstall, remove ~/.config/hypr and ~/.config/pigos first."
 else
-    echo "🚀 Starting HyDE installation..."
-    cd /home/arch/HyDE/Scripts
+    echo "🚀 Starting PigOS installation..."
+    cd /home/arch/PigOS/Scripts
     ./install.sh
-    echo "✅ HyDE installation complete!"
+    echo "✅ PigOS installation complete!"
 fi
 
 echo ""
@@ -437,7 +437,7 @@ SETUP_EOF
     chmod +x "$setup_script"
 
     echo ""
-    echo "🖥️  Starting VM for HyDE installation..."
+    echo "🖥️  Starting VM for PigOS installation..."
     echo "📋 SETUP INSTRUCTIONS:"
     echo "   1. Wait for the VM to boot to login prompt"
     echo "   2. Login as: arch / arch"
@@ -454,7 +454,7 @@ SETUP_EOF
 
     # Start simple HTTP server in background to serve the setup script
     cd "$CACHE_DIR"
-    # TODO: feat(hydevm) migrate from the python http server to a pure ssh solution, no setup script needed
+    # TODO: feat(pigosvm) migrate from the python http server to a pure ssh solution, no setup script needed
     $python_cmd -m http.server 8000 --bind 127.0.0.1 &
     local server_pid=$!
 
@@ -473,8 +473,8 @@ SETUP_EOF
     # Cleanup
     rm -f "$temp_image" "$setup_script"
 
-    echo "✅ Snapshot created: hyde-$snapshot_name"
-    echo "🚀 You can now run: hydevm $ref"
+    echo "✅ Snapshot created: pigos-$snapshot_name"
+    echo "🚀 You can now run: pigosvm $ref"
 }
 
 function run_vm() {
@@ -482,14 +482,14 @@ function run_vm() {
     local persistent="${2:-false}"
     local snapshot_name
     snapshot_name=$(get_snapshot_name "$ref")
-    local snapshot_path="$SNAPSHOTS_DIR/hyde-$snapshot_name.qcow2"
+    local snapshot_path="$SNAPSHOTS_DIR/pigos-$snapshot_name.qcow2"
     local qemu_cmd
     qemu_cmd=$(get_qemu_command)
 
     # Ensure snapshot exists
     if [ ! -f "$snapshot_path" ]; then
         echo "📸 Snapshot for '$ref' not found, creating it..."
-        create_hyde_snapshot "$ref"
+        create_pigos_snapshot "$ref"
     fi
 
     local vm_disk
@@ -503,7 +503,7 @@ function run_vm() {
         trap 'rm -f "$vm_disk"' EXIT
     fi
 
-    echo "🚀 Starting HyDE VM (branch/commit: $ref)..."
+    echo "🚀 Starting PigOS VM (branch/commit: $ref)..."
     echo "   Login: arch / arch"
     echo "   SSH: ssh arch@localhost -p 2222"
 
@@ -512,17 +512,17 @@ function run_vm() {
 }
 
 function list_snapshots() {
-    echo "📸 Available HyDE snapshots:"
+    echo "📸 Available PigOS snapshots:"
     if [ -d "$SNAPSHOTS_DIR" ]; then
-        find "$SNAPSHOTS_DIR" -name "hyde-*.qcow2" -exec basename {} \; | \
-            sed 's/^hyde-//' | sed 's/\.qcow2$//' | sort
+        find "$SNAPSHOTS_DIR" -name "pigos-*.qcow2" -exec basename {} \; | \
+            sed 's/^pigos-//' | sed 's/\.qcow2$//' | sort
     else
         echo "No snapshots found"
     fi
 }
 
 function clean_cache() {
-    echo "🧹 Cleaning HydeVM cache..."
+    echo "🧹 Cleaning PigOSVM cache..."
     rm -rf "$CACHE_DIR"
     echo "✅ Cache cleaned"
 }

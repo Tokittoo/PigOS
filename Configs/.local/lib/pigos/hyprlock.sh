@@ -1,17 +1,17 @@
 #! /bin/bash
 
-# shellcheck source=$HOME/.local/bin/hyde-shell
+# shellcheck source=$HOME/.local/bin/pigos-shell
 # shellcheck disable=SC1091
-if ! source "$(which hyde-shell)"; then
-  echo "Error: hyde-shell not found."
-  echo "Is HyDE installed?"
+if ! source "$(which pigos-shell)"; then
+  echo "Error: pigos-shell not found."
+  echo "Is PigOS installed?"
   exit 1
 fi
-scrDir=${scrDir:-$HOME/.local/lib/hyde}
+scrDir=${scrDir:-$HOME/.local/lib/pigos}
 confDir="${confDir:-$XDG_CONFIG_HOME}"
-cacheDir="${HYDE_CACHE_HOME:-"${XDG_CACHE_HOME}/hyde"}"
+cacheDir="${PIGOS_CACHE_HOME:-"${XDG_CACHE_HOME}/pigos"}"
 WALLPAPER="${cacheDir}/wall.set"
-HYPRLOCK_SCOPE_NAME="hyde-${XDG_SESSION_DESKTOP:-unknown}-lockscreen.scope"
+HYPRLOCK_SCOPE_NAME="pigos-${XDG_SESSION_DESKTOP:-unknown}-lockscreen.scope"
 
 
 USAGE() {
@@ -43,8 +43,8 @@ fn_background() {
   is_video=$(file --mime-type -b "${WP}" | grep -c '^video/')
   if [ "${is_video}" -eq 1 ]; then
     print_log -sec "wallpaper" -stat "converting video" "$WP"
-    mkdir -p "${HYDE_CACHE_HOME}/wallpapers/thumbnails"
-    cached_thumb="$HYDE_CACHE_HOME/wallpapers/$(${hashMech:-sha1sum} "${WP}" | cut -d' ' -f1).png"
+    mkdir -p "${PIGOS_CACHE_HOME}/wallpapers/thumbnails"
+    cached_thumb="$PIGOS_CACHE_HOME/wallpapers/$(${hashMech:-sha1sum} "${WP}" | cut -d' ' -f1).png"
     extract_thumbnail "${WP}" "${cached_thumb}"
     WP="${cached_thumb}"
   fi
@@ -60,7 +60,7 @@ fn_profile() {
   if [ -f "$HOME/.face.icon" ]; then
     cp "$HOME/.face.icon" "${profilePath}.png"
   else
-    cp "$XDG_DATA_HOME/icons/Wallbash-Icon/hyde.png" "${profilePath}.png"
+    cp "$XDG_DATA_HOME/icons/Wallbash-Icon/pigos.png" "${profilePath}.png"
   fi
   return 0
 }
@@ -79,8 +79,8 @@ fn_mpris() {
         reload_hyprlock
       fi
     else
-      if ! cmp -s "$XDG_DATA_HOME/icons/Wallbash-Icon/hyde.png" "${THUMB}.png"; then
-        cp "$XDG_DATA_HOME/icons/Wallbash-Icon/hyde.png" "${THUMB}.png"
+      if ! cmp -s "$XDG_DATA_HOME/icons/Wallbash-Icon/pigos.png" "${THUMB}.png"; then
+        cp "$XDG_DATA_HOME/icons/Wallbash-Icon/pigos.png" "${THUMB}.png"
         reload_hyprlock
       fi
     fi
@@ -124,7 +124,7 @@ mpris_thumb() { # Generate thumbnail for mpris
 fn_cava() {
   local tempFile=/tmp/hyprlock-cava
   [ -f "${tempFile}" ] && tail -n 1 "${tempFile}"
-  config_file="${XDG_RUNTIME_DIR}/hyde/cava.hyprlock"
+  config_file="${XDG_RUNTIME_DIR}/pigos/cava.hyprlock"
   if [ "$(pgrep -c -f "cava -p ${config_file}")" -eq 0 ]; then
     trap 'rm -f ${tempFile}' EXIT
     "$scrDir/cava.sh" hyprlock >${tempFile} 2>&1
@@ -139,7 +139,7 @@ find_filepath() {
   local filename="${*:-$1}"
   local search_dirs=(
     "${XDG_CONFIG_HOME:-$HOME/.config}/hypr/hyprlock"
-    "${XDG_CONFIG_HOME:-$HOME/.config}/hyde/hyprlock"
+    "${XDG_CONFIG_HOME:-$HOME/.config}/pigos/hyprlock"
     "${HYPRLOCK_CONF_DIR}"
   )
   print_log -sec "hyprlock" -stat "Searching for layout" "$filename"
@@ -186,7 +186,7 @@ ${layout_items}"
       -theme-str "${font_override}" \
       -theme-str "${r_override}" \
       -theme-str "$(get_rofi_pos)" \
-      -on-selection-changed "hyde-shell hyprlock.sh --test-preview  \"{entry}\"" \
+      -on-selection-changed "pigos-shell hyprlock.sh --test-preview  \"{entry}\"" \
       -theme "${ROFI_HYPRLOCK_STYLE:-clipboard}" )
   
   if [ -z "$selected_layout" ]; then
@@ -279,7 +279,7 @@ layout_test() {
     exit 1
   fi
   sleep 2
-  local temp_path="${XDG_RUNTIME_DIR}/hyde/hyprlock-test.conf"
+  local temp_path="${XDG_RUNTIME_DIR}/pigos/hyprlock-test.conf"
   generate_conf "${hyprlock_conf_path}" "${temp_path}" 
   append_label_to_file "${temp_path}"
   app2unit.sh -S both -u "${HYPRLOCK_SCOPE_NAME}" -t scope -- hyprlock --no-fade-in --immediate-render --grace 99999999 -c "${temp_path}"
@@ -292,7 +292,7 @@ local hyprlock_conf_name="${*:-${1}}"
 if [[ "${hyprlock_conf_name}" == "Theme Preference" ]]; then
   hyprlock_conf_name="theme"
 fi
-local unit_name="hyde-${XDG_SESSION_DESKTOP:-unknown}-lockscreen-preview.scope"
+local unit_name="pigos-${XDG_SESSION_DESKTOP:-unknown}-lockscreen-preview.scope"
 check_and_sanitize_process "${unit_name}"
   send_notifs "Hyprlock layout: ${hyprlock_conf_name}" "Please swipe, press a key or click to exit." \
     -i "system-lock-screen" -t 3000 \
@@ -305,7 +305,7 @@ app2unit.sh -S both -u "${unit_name}" -t scope -- hyprlock.sh --test "${hyprlock
 generate_conf() {
   local path="${1:-$confDir/hypr/hyprlock/theme.conf}"
   local target_file="${2:-$confDir/hypr/hyprlock.conf}"
-  local hyde_hyprlock_conf=${SHARE_DIR:-$XDG_DATA_HOME}/hyde/hyprlock.conf
+  local hyde_hyprlock_conf=${SHARE_DIR:-$XDG_DATA_HOME}/pigos/hyprlock.conf
 
   cat <<CONF >"${target_file}"
 #! █░█ █▄█ █▀█ █▀█ █░░ █▀█ █▀▀ █▄▀
@@ -334,7 +334,7 @@ generate_conf() {
 #*┌────────────────────────────────────────────────────────────────────────────┐
 #*│    Persistent layout declaration                                        │
 #*│ # If a persistent layout path is declared in                               │
-#*│ \$XDG_CONFIG_HOME/hypr/hyde.conf,                                          │
+#*│ \$XDG_CONFIG_HOME/hypr/pigos.conf,                                          │
 #*│ # the above layout setting will be ignored.                                │
 #*│ # this should be the full path to the layout file.                         │
 #*│                                                                            │
@@ -342,7 +342,7 @@ generate_conf() {
 
 
 #*┌──────────────────────────────────────────────────────────────────────────┐
-#*│    All boilerplate configurations are handled by HyDE                  │
+#*│    All boilerplate configurations are handled by PigOS                  │
 #*└──────────────────────────────────────────────────────────────────────────┘
 
 source = ${hyde_hyprlock_conf}
@@ -351,18 +351,6 @@ source = ${hyde_hyprlock_conf}
 #┌────────────────────────────────────────────────────────────────────────────┐
 #│ Making a custom layout                                                   │
 #│ - To create a custom layout, make a file in the './hyprlock/' directory.   │
-#│ - Example: './hyprlock/your_custom.conf'                                   │
-#│ - To use the custom layout, set the following variable:                    │
-#│ - \$LAYOUT_PATH=your_custom                                                │
-#│ - The custom layout will be sourced automatically.                         │
-#│ - Alternatively, you can statically source the layout in                   │
-#│          '~/.config/hypr/hyde.conf'.                                       │
-#│ - This will take precedence over the variable in                           │
-#│            '~/.config/hypr/hyprlock.conf'.                                 │ 
-#│                                                                            │
-#└────────────────────────────────────────────────────────────────────────────┘
-
-
  #┌────────────────────────────────────────────────────────────────────────────┐
  #│  Command Variables                                                       │
  #│ # Hyprlock ships with there default variables that can be used to          │
@@ -372,7 +360,7 @@ source = ${hyde_hyprlock_conf}
  #└────────────────────────────────────────────────────────────────────────────┘
 
 #┌────────────────────────────────────────────────────────────────────────────┐
-#│ HyDE also provides custom variables to extend hyprlock's functionality.  │
+#│ PigOS also provides custom variables to extend hyprlock's functionality.  │
 #│                                                                            │
 #│   \$BACKGROUND_PATH                                                        │
 #│   - The path to the wallpaper image.                                       │
@@ -384,12 +372,12 @@ source = ${hyde_hyprlock_conf}
 #│   \$MPRIS_IMAGE                                                            │
 #│   - The path to the MPRIS image.                                           │
 #│   - If MPRIS is not available, it will show the ~/.face.icon image         │
-#│   - if available, otherwise, it will show the HyDE logo.                   │
+#│   - if available, otherwise, it will show the PigOS logo.                   │
 #│                                                                            │
 #│   \$PROFILE_IMAGE                                                          │
 #│   - The path to the profile image.                                         │
 #│   - If the image is not available, it will show the ~/.face.icon image     │
-#│   - if available, otherwise, it will show the HyDE logo.                   │
+#│   - if available, otherwise, it will show the PigOS logo.                   │
 #│                                                                            │
 #│   \$GREET_TEXT                                                             │
 #│   - A greeting text to be displayed on the lock screen.                    │
@@ -397,7 +385,7 @@ source = ${hyde_hyprlock_conf}
 #│                                                                            │
 #│   \$resolve.font                                                           │
 #│   - Resolves the font name and download link.                              │
-#│   - HyDE will run 'font.sh resolve' to install the font for you.           │
+#│   - PigOS will run 'font.sh resolve' to install the font for you.           │
 #│   - Note that you needed to have a network connection to download the      │
 #│ font.                                                                      │
 #│   - You also need to restart Hyprlock to apply the font.                   │
@@ -424,9 +412,9 @@ CONF
 }
 
 if [ -z "${*}" ]; then
-  if [ ! -f "$HYDE_CACHE_HOME/wallpapers/hyprlock.png" ]; then
-    print_log -sec "hyprlock" -stat "setting" " $HYDE_CACHE_HOME/wallpapers/hyprlock.png"
-    "${scrDir}/wallpaper.sh" -s "$(readlink "${HYDE_THEME_DIR}/wall.set")" --backend hyprlock
+  if [ ! -f "$PIGOS_CACHE_HOME/wallpapers/hyprlock.png" ]; then
+    print_log -sec "hyprlock" -stat "setting" " $PIGOS_CACHE_HOME/wallpapers/hyprlock.png"
+    "${scrDir}/wallpaper.sh" -s "$(readlink "${PIGOS_THEME_DIR}/wall.set")" --backend hyprlock
   fi
   check_and_sanitize_process
   app2unit.sh -u "${HYPRLOCK_SCOPE_NAME}" -t scope -- hyprlock

@@ -82,5 +82,5 @@ starship|fish                                          # customizable shell prom
 
 fastfetch                                              # system information fetch tool
 
-# --------------------------------------------------- // HyDE
+# --------------------------------------------------- // PigOS
 hypridle                                               # idle daemon

@@ -2,9 +2,9 @@
 # shellcheck disable=SC2154
 # shellcheck disable=SC1091
 
-[[ "${HYDE_SHELL_INIT}" -ne 1 ]] && eval "$(hyde-shell init)"
+[[ "${PIGOS_SHELL_INIT}" -ne 1 ]] && eval "$(pigos-shell init)"
 
-[ -z "${HYDE_THEME}" ] && echo "ERROR: unable to detect theme" && exit 1
+[ -z "${PIGOS_THEME}" ] && echo "ERROR: unable to detect theme" && exit 1
 get_themes
 confDir="${XDG_CONFIG_HOME:-$HOME/.config}"
 #// define functions
@@ -14,7 +14,7 @@ Theme_Change() {
 
   # shellcheck disable=SC2154
   for i in "${!thmList[@]}"; do
-    if [ "${thmList[i]}" == "${HYDE_THEME}" ]; then
+    if [ "${thmList[i]}" == "${PIGOS_THEME}" ]; then
       if [ "${x_switch}" == 'n' ]; then
         setIndex=$(((i + 1) % ${#thmList[@]}))
       elif [ "${x_switch}" == 'p' ]; then
@@ -28,7 +28,7 @@ Theme_Change() {
 
 show_theme_status() {
   cat <<EOF
-Current theme: ${HYDE_THEME}
+Current theme: ${PIGOS_THEME}
 Gtk theme: ${GTK_THEME}
 Icon theme: ${ICON_THEME}
 Cursor theme: ${CURSOR_THEME}
@@ -152,14 +152,14 @@ done
 #// update control file
 
 # shellcheck disable=SC2076
-[[ ! " ${thmList[*]} " =~ " ${themeSet} " ]] && themeSet="${HYDE_THEME}"
+[[ ! " ${thmList[*]} " =~ " ${themeSet} " ]] && themeSet="${PIGOS_THEME}"
 
-set_conf "HYDE_THEME" "${themeSet}"
+set_conf "PIGOS_THEME" "${themeSet}"
 print_log -sec "theme" -stat "apply" "${themeSet}"
 
 export reload_flag=1
-source "${LIB_DIR}/hyde/globalcontrol.sh"
-source "${SHARE_DIR}/hyde/env-theme"
+source "${LIB_DIR}/pigos/globalcontrol.sh"
+source "${SHARE_DIR}/pigos/env-theme"
 
 #// hypr
 if [[ -r "${HYPRLAND_CONFIG}" ]]; then
@@ -167,13 +167,13 @@ if [[ -r "${HYPRLAND_CONFIG}" ]]; then
   # shellcheck disable=SC2154
   # Updates the compositor theme data in advance
   [[ -n $HYPRLAND_INSTANCE_SIGNATURE ]] && hyprctl keyword misc:disable_autoreload 1 -q
-  [[ -r "${HYDE_THEME_DIR}/hypr.theme" ]] && sanitize_hypr_theme "${HYDE_THEME_DIR}/hypr.theme" "${XDG_CONFIG_HOME}/hypr/themes/theme.conf"
+  [[ -r "${PIGOS_THEME_DIR}/hypr.theme" ]] && sanitize_hypr_theme "${PIGOS_THEME_DIR}/hypr.theme" "${XDG_CONFIG_HOME}/hypr/themes/theme.conf"
 
   #? Load theme specific variables
-  load_hypr_variables "${HYDE_THEME_DIR}/hypr.theme"
+  load_hypr_variables "${PIGOS_THEME_DIR}/hypr.theme"
 
   #? Load User's hyprland overrides
-  load_hypr_variables "${XDG_STATE_DIR:-$HOME/.local/state}/hyde/hyprland.conf"
+  load_hypr_variables "${XDG_STATE_DIR:-$HOME/.local/state}/pigos/hyprland.conf"
 
 fi
 
@@ -334,17 +334,17 @@ fi
 #// wallpaper
 export -f pkg_installed
 
-[[ -d "$HYDE_CACHE_HOME/wallpapers/" ]] && find -H "$HYDE_CACHE_HOME/wallpapers" -name "*.png" -exec sh -c '
+[[ -d "$PIGOS_CACHE_HOME/wallpapers/" ]] && find -H "$PIGOS_CACHE_HOME/wallpapers" -name "*.png" -exec sh -c '
     for file; do
         base=$(basename "$file" .png)
         if pkg_installed ${base}; then
-            "${LIB_DIR}/hyde/wallpaper.sh" --link --backend "${base}"
+            "${LIB_DIR}/pigos/wallpaper.sh" --link --backend "${base}"
         fi
     done
 ' sh {} + &
 
 if [ "$quiet" = true ]; then
-  "${LIB_DIR}/hyde/wallpaper.sh" -s "$(readlink "${HYDE_THEME_DIR}/wall.set")" --global >/dev/null 2>&1
+  "${LIB_DIR}/pigos/wallpaper.sh" -s "$(readlink "${PIGOS_THEME_DIR}/wall.set")" --global >/dev/null 2>&1
 else
-  "${LIB_DIR}/hyde/wallpaper.sh" -s "$(readlink "${HYDE_THEME_DIR}/wall.set")" --global
+  "${LIB_DIR}/pigos/wallpaper.sh" -s "$(readlink "${PIGOS_THEME_DIR}/wall.set")" --global
 fi

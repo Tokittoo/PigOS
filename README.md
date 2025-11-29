@@ -1,13 +1,13 @@
 <div align = center>
   
 <a href="https://discord.gg/AYbJ9MJez7">
-    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+    <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20PigOS%20Project&labelColor=ebbcba&color=c79bf0">
   </a>
 </div>
 
 ###### _<div align="right"><a id=-design-by-t2></a><sub>// design by t2</sub></div>_
 
-![hyde_banner](Source/assets/hyde_banner.png)
+![pigos_banner](Source/assets/pigos_banner.png)
 
 <!--
 Multi-language README support
@@ -51,7 +51,7 @@ Multi-language README support
 </div>
 
 Check this out for the full note:
-[Journey to HyDE and beyond](./Hyprdots-to-HyDE.md)
+[Journey to PigOS and beyond](./Hyprdots-to-PigOS.md)
 
 <!--
 <img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
@@ -69,9 +69,9 @@ Check this out for the full note:
 ---
 
 The installation script is designed for a minimal [Arch Linux](https://wiki.archlinux.org/title/Arch_Linux) install, but **may** work on some [Arch-based distros](https://wiki.archlinux.org/title/Arch-based_distributions).
-While installing HyDE alongside another [DE](https://wiki.archlinux.org/title/Desktop_environment)/[WM](https://wiki.archlinux.org/title/Window_manager) should work, due to it being a heavily customized setup, it **will** conflict with your [GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) theming, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB), etc. and is at your own risk.
+While installing PigOS alongside another [DE](https://wiki.archlinux.org/title/Desktop_environment)/[WM](https://wiki.archlinux.org/title/Window_manager) should work, due to it being a heavily customized setup, it **will** conflict with your [GTK](https://wiki.archlinux.org/title/GTK)/[Qt](https://wiki.archlinux.org/title/Qt) theming, [Shell](https://wiki.archlinux.org/title/Command-line_shell), [SDDM](https://wiki.archlinux.org/title/SDDM), [GRUB](https://wiki.archlinux.org/title/GRUB), etc. and is at your own risk.
 
-For NixOS support there is a separate project being maintained @ [Hydenix](https://github.com/richen604/hydenix/tree/main)
+For NixOS support there is a separate project being maintained @ [Pigonix](https://github.com/richen604/hydenix/tree/main)
 
 > [!IMPORTANT]
 > The install script will auto-detect an NVIDIA card and install nvidia-dkms drivers for your kernel.
@@ -84,13 +84,13 @@ To install, execute the following commands:
 
 ```shell
 sudo pacman -S --needed git base-devel
-git clone --depth 1 https://github.com/HyDE-Project/HyDE ~/HyDE
-cd ~/HyDE/Scripts
+git clone --depth 1 https://github.com/PigOS-Project/PigOS ~/PigOS
+cd ~/PigOS/Scripts
 ./install.sh
 ```
 
 > [!TIP]
-> You can also add any other apps you wish to install alongside HyDE to `Scripts/pkg_user.lst` and pass the file as a parameter to install it like so:
+> You can also add any other apps you wish to install alongside PigOS to `Scripts/pkg_user.lst` and pass the file as a parameter to install it like so:
 >
 > ```shell
 > ./install.sh pkg_user.lst
@@ -102,12 +102,12 @@ cd ~/HyDE/Scripts
 
 <!--
 
-As a second install option, you can also use `Hyde-install`, which might be easier for some.
-View installation instructions for HyDE in [Hyde-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).
+As a second install option, you can also use `PigOS-install`, which might be easier for some.
+View installation instructions for PigOS in [PigOS-cli - Usage](https://github.com/kRHYME7/Hyde-cli?tab=readme-ov-file#usage).
 -->
 
 Please reboot after the install script completes and takes you to the SDDM login screen (or black screen) for the first time.
-For more details, please refer to the [installation wiki](https://github.com/HyDE-Project/HyDE/wiki/installation).
+For more details, please refer to the [installation wiki](https://github.com/PigOS-Project/PigOS/wiki/installation).
 
 <div align="right">
   <br>
@@ -131,7 +131,7 @@ We welcome contributions from the community! To get started:
 - Review our release process in [RELEASE_POLICY.md](RELEASE_POLICY.md)
 - Add yourself to [CONTRIBUTORS.md](CONTRIBUTORS.md) when making your first PR
 
-Whether you're helping with code, testing, or documentation, we appreciate your support in making HyDE better for everyone. Thank you!
+Whether you're helping with code, testing, or documentation, we appreciate your support in making PigOS better for everyone. Thank you!
 
 <div align="right">
   <br>
@@ -143,10 +143,10 @@ Whether you're helping with code, testing, or documentation, we appreciate your 
 
 ---
 
-To update HyDE, you will need to pull the latest changes from GitHub and restore the configs by running the following commands:
+To update PigOS, you will need to pull the latest changes from GitHub and restore the configs by running the following commands:
 
 ```shell
-cd ~/HyDE/Scripts
+cd ~/PigOS/Scripts
 git pull origin master
 ./install.sh -r
 ```
@@ -156,8 +156,8 @@ git pull origin master
 > However, all replaced configs are backed up and may be recovered from in `~/.config/cfg_backups`.
 
 <!--
-As a second update option, you can use `Hyde restore ...`, which does have a better way of managing restore and backup options.
-For more details, you can refer to [Hyde-cli - dots management wiki](https://github.com/kRHYME7/Hyde-cli/wiki/Dots-Management).
+As a second update option, you can use `PigOS restore ...`, which does have a better way of managing restore and backup options.
+For more details, you can refer to [PigOS-cli - dots management wiki](https://github.com/kRHYME7/Hyde-cli/wiki/Dots-Management).
 -->
 
 <div align="right">
@@ -165,12 +165,12 @@ For more details, you can refer to [Hyde-cli - dots management wiki](https://git
   <a href="#-design-by-t2"><kbd> <br> 🡅 <br> </kbd></a>
 </div>
 
-<a id="hydevm"></a>
-<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=HYDEVM" width="450"/>
+<a id="pigosvm"></a>
+<img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&vCenter=true&width=435&height=25&lines=PIGOSVM" width="450"/>
 
 ---
 
-HyDEVM is a script that allows you to run HyDE in a virtual machine for testing and development.
+PigOSVM is a script that allows you to run PigOS in a virtual machine for testing and development.
 
 ## Quick Start
 
@@ -178,22 +178,22 @@ HyDEVM is a script that allows you to run HyDE in a virtual machine for testing 
 
 ```bash
 # Download and run (will auto-detect missing packages)
-curl -L https://raw.githubusercontent.com/HyDE-Project/HyDE/main/Scripts/hydevm/hydevm.sh -o hydevm
-chmod +x hydevm
-./hydevm
+curl -L https://raw.githubusercontent.com/PigOS-Project/PigOS/main/Scripts/pigosvm/pigosvm.sh -o pigosvm
+chmod +x pigosvm
+./pigosvm
 ```
 
 ### NixOS (or Nix)
 
 ```bash
-# Using flakes from HyDE repository
-nix run github:HyDE-Project/HyDE
+# Using flakes from PigOS repository
+nix run github:PigOS-Project/PigOS
 
 # Or if you have the repository cloned locally
 nix run .
 ```
 
-For more details, please refer to the [HyDEVM README](Scripts/hydevm/README.md).
+For more details, please refer to the [PigOSVM README](Scripts/pigosvm/README.md).
 
 <div align="right">
   <br>
@@ -206,23 +206,23 @@ For more details, please refer to the [HyDEVM README](Scripts/hydevm/README.md).
 ---
 
 All our official themes are stored in a separate repository, allowing users to install them using themepatcher.
-For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-Project/hyde-themes).
+For more information, visit [PigOS-Project/pigos-themes](https://github.com/PigOS-Project/pigos-themes).
 
 <div align="center">
   <table><tr><td>
 
-[![Catppuccin-Latte](https://placehold.co/130x30/dd7878/eff1f5?text=Catppuccin-Latte&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Catppuccin-Latte)
-[![Catppuccin-Mocha](https://placehold.co/130x30/b4befe/11111b?text=Catppuccin-Mocha&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Catppuccin-Mocha)
-[![Decay-Green](https://placehold.co/130x30/90ceaa/151720?text=Decay-Green&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Decay-Green)
-[![Edge-Runner](https://placehold.co/130x30/fada16/000000?text=Edge-Runner&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Edge-Runner)
-[![Frosted-Glass](https://placehold.co/130x30/7ed6ff/1e4c84?text=Frosted-Glass&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Frosted-Glass)
-[![Graphite-Mono](https://placehold.co/130x30/a6a6a6/262626?text=Graphite-Mono&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Graphite-Mono)
-[![Gruvbox-Retro](https://placehold.co/130x30/475437/B5CC97?text=Gruvbox-Retro&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Gruvbox-Retro)
-[![Material-Sakura](https://placehold.co/130x30/f2e9e1/b4637a?text=Material-Sakura&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Material-Sakura)
-[![Nordic-Blue](https://placehold.co/130x30/D9D9D9/476A84?text=Nordic-Blue&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Nordic-Blue)
-[![Rosé-Pine](https://placehold.co/130x30/c4a7e7/191724?text=Rosé-Pine&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Rose-Pine)
-[![Synth-Wave](https://placehold.co/130x30/495495/ff7edb?text=Synth-Wave&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Synth-Wave)
-[![Tokyo-Night](https://placehold.co/130x30/7aa2f7/24283b?text=Tokyo-Night&font=Oswald)](https://github.com/HyDE-Project/hyde-themes/tree/Tokyo-Night)
+[![Catppuccin-Latte](https://placehold.co/130x30/dd7878/eff1f5?text=Catppuccin-Latte&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Catppuccin-Latte)
+[![Catppuccin-Mocha](https://placehold.co/130x30/b4befe/11111b?text=Catppuccin-Mocha&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Catppuccin-Mocha)
+[![Decay-Green](https://placehold.co/130x30/90ceaa/151720?text=Decay-Green&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Decay-Green)
+[![Edge-Runner](https://placehold.co/130x30/fada16/000000?text=Edge-Runner&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Edge-Runner)
+[![Frosted-Glass](https://placehold.co/130x30/7ed6ff/1e4c84?text=Frosted-Glass&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Frosted-Glass)
+[![Graphite-Mono](https://placehold.co/130x30/a6a6a6/262626?text=Graphite-Mono&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Graphite-Mono)
+[![Gruvbox-Retro](https://placehold.co/130x30/475437/B5CC97?text=Gruvbox-Retro&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Gruvbox-Retro)
+[![Material-Sakura](https://placehold.co/130x30/f2e9e1/b4637a?text=Material-Sakura&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Material-Sakura)
+[![Nordic-Blue](https://placehold.co/130x30/D9D9D9/476A84?text=Nordic-Blue&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Nordic-Blue)
+[![Rosé-Pine](https://placehold.co/130x30/c4a7e7/191724?text=Rosé-Pine&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Rose-Pine)
+[![Synth-Wave](https://placehold.co/130x30/495495/ff7edb?text=Synth-Wave&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Synth-Wave)
+[![Tokyo-Night](https://placehold.co/130x30/7aa2f7/24283b?text=Tokyo-Night&font=Oswald)](https://github.com/PigOS-Project/pigos-themes/tree/Tokyo-Night)
 
   </td></tr></table>
 </div>
@@ -230,7 +230,7 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
 > [!TIP]
 > Everyone, including you can create, maintain, and share additional themes, all of which can be installed using themepatcher!
 > To create your own custom theme, please refer to the [theming wiki](https://github.com/prasanthrangan/hyprdots/wiki/Theming).
-> If you wish to have your hyde theme showcased, or you want to find some non-official themes, visit [kRHYME7/hyde-gallery](https://github.com/kRHYME7/hyde-gallery)!
+> If you wish to have your pigos theme showcased, or you want to find some non-official themes, visit [kRHYME7/pigos-gallery](https://github.com/kRHYME7/hyde-gallery)!
 
 <div align="right">
   <br>
@@ -288,11 +288,11 @@ For more information, visit [HyDE-Project/hyde-themes](https://github.com/HyDE-P
 
 ---
 
-<a href="https://star-history.com/#hyde-project/hyde&hyde-project/hyde-gallery&hyde-project/hyde-themes&Timeline">
+<a href="https://star-history.com/#pigos-project/pigos&pigos-project/pigos-gallery&pigos-project/pigos-themes&Timeline">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=hyde-project/hyde&type=Timeline" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=pigos-project/pigos&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=pigos-project/pigos&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=pigos-project/pigos&type=Timeline" />
  </picture>
 </a>
 
@@ -328,8 +328,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://rubiin.is-a.dev"><img src="https://avatars.githubusercontent.com/u/8222059?v=4?s=100" width="100px;" alt="Rubin Bhandari"/><br /><sub><b>Rubin Bhandari</b></sub></a><br /><a href="https://github.com/HyDE-Project/HyDE/commits?author=rubiin" title="Code">💻</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kRHYME7"><img src="https://avatars.githubusercontent.com/u/53417443?v=4?s=100" width="100px;" alt="Khing"/><br /><sub><b>Khing</b></sub></a><br /><a href="https://github.com/HyDE-Project/HyDE/commits?author=kRHYME7" title="Code">💻</a> <a href="https://github.com/HyDE-Project/HyDE/commits?author=kRHYME7" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://rubiin.is-a.dev"><img src="https://avatars.githubusercontent.com/u/8222059?v=4?s=100" width="100px;" alt="Rubin Bhandari"/><br /><sub><b>Rubin Bhandari</b></sub></a><br /><a href="https://github.com/PigOS-Project/PigOS/commits?author=rubiin" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kRHYME7"><img src="https://avatars.githubusercontent.com/u/53417443?v=4?s=100" width="100px;" alt="Khing"/><br /><sub><b>Khing</b></sub></a><br /><a href="https://github.com/PigOS-Project/PigOS/commits?author=kRHYME7" title="Code">💻</a> <a href="https://github.com/PigOS-Project/PigOS/commits?author=kRHYME7" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>

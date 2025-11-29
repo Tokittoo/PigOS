@@ -8,7 +8,7 @@ if ! source "$(which hyde-shell)"; then
     exit 1
 fi
 
-sunsetConf="${XDG_STATE_HOME:-$HOME/.local/state}/hyde/hyprsunset"
+sunsetConf="${XDG_STATE_HOME:-$HOME/.local/state}/pigos/hyprsunset"
 
 # Default settings
 default_temp=6500
@@ -56,9 +56,9 @@ send_notification() {
 
     # Send notification with title and message separated
     if [ -n "$message" ]; then
-        notify-send -a "HyDE Notify" -r 19 -t 800 -i redshift "$message" "$title"
+        notify-send -a "PigOS Notify" -r 19 -t 800 -i redshift "$message" "$title"
     else
-        notify-send -a "HyDE Notify" -r 19 -t 800 -i redshift  "$title"
+        notify-send -a "PigOS Notify" -r 19 -t 800 -i redshift  "$title"
     fi
 }
 # Signal process function

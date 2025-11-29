@@ -1,8 +1,8 @@
-# HydeVM - Simplified VM Tool for HyDE Contributors
+# PigOSVM - Simplified VM Tool for PigOS Contributors
 
-HydeVM is a streamlined development tool that automatically sets up HyDE in a virtual machine for testing different branches and commits.
+PigOSVM is a streamlined development tool that automatically sets up PigOS in a virtual machine for testing different branches and commits.
 
-- [HydeVM - Simplified VM Tool for HyDE Contributors](#hydevm---simplified-vm-tool-for-hyde-contributors)
+- [PigOSVM - Simplified VM Tool for PigOS Contributors](#pigosvm---simplified-vm-tool-for-pigos-contributors)
   - [Hardware Requirements](#hardware-requirements)
   - [Features](#features)
   - [Quick Start](#quick-start)
@@ -45,8 +45,8 @@ HydeVM is a streamlined development tool that automatically sets up HyDE in a vi
 
 ## Features
 
-- **Zero Configuration**: Automatically downloads Arch Linux base image and sets up HyDE
-- **Branch Testing**: Easily test any HyDE branch or commit hash
+- **Zero Configuration**: Automatically downloads Arch Linux base image and sets up PigOS
+- **Branch Testing**: Easily test any PigOS branch or commit hash
 - **Smart Caching**: Creates cached snapshots for faster subsequent runs (uses XDG cache directory)
 - **Optional Persistence**: Choose whether changes should be saved or discarded
 - **OS Detection**: Automatically detects your OS and handles dependencies appropriately
@@ -57,16 +57,16 @@ HydeVM is a streamlined development tool that automatically sets up HyDE in a vi
 
 ```bash
 # Download and run (will auto-detect missing packages)
-curl -L https://raw.githubusercontent.com/HyDE-Project/HyDE/main/Scripts/hydevm/hydevm.sh -o hydevm
-chmod +x hydevm
-./hydevm
+curl -L https://raw.githubusercontent.com/PigOS-Project/PigOS/main/Scripts/pigosvm/pigosvm.sh -o pigosvm
+chmod +x pigosvm
+./pigosvm
 ```
 
 ### NixOS
 
 ```bash
-# Using flakes from HyDE repository
-nix run github:HyDE-Project/HyDE
+# Using flakes from PigOS repository
+nix run github:PigOS-Project/PigOS
 
 # Or if you have the repository cloned locally
 nix run
@@ -74,12 +74,12 @@ nix run
 
 ## First-Time Setup
 
-When you run a new branch/commit for the first time, hydevm will:
+When you run a new branch/commit for the first time, pigosvm will:
 
 1. **OS Detection**: Automatically detects your OS and checks dependencies
 2. **Dependency Installation**: (Arch only) Prompts to install missing packages
 3. **VM Setup**: Shows a VM window with setup instructions
-4. **HyDE Installation**: You'll need to:
+4. **PigOS Installation**: You'll need to:
    - Login as `arch` / `arch`
    - Run the provided curl command to download and execute the setup script
    - Wait for HyDE installation to complete
@@ -97,40 +97,40 @@ When you run a new branch/commit for the first time, hydevm will:
 
 ```bash
 # Run master branch
-hydevm
+pigosvm
 
 # Run specific branch or commit
-hydevm feature-branch
-hydevm abc123def
+pigosvm feature-branch
+pigosvm abc123def
 
 # Run with persistence (changes will be saved)
-hydevm --persist
-hydevm --persist dev-branch
+pigosvm --persist
+pigosvm --persist dev-branch
 
 # List cached snapshots
-hydevm --list
+pigosvm --list
 
 # Clean all cached data
-hydevm --clean
+pigosvm --clean
 
 # Check dependencies
-hydevm --check-deps
+pigosvm --check-deps
 
 # Install dependencies (Arch only)
-hydevm --install-deps
+pigosvm --install-deps
 ```
 
 ### Environment Variables
 
 ```bash
 # Customize VM resources
-VM_MEMORY=8G VM_CPUS=4 hydevm
+VM_MEMORY=8G VM_CPUS=4 pigosvm
 
 # Set extra QEMU arguments
-VM_EXTRA_ARGS="-display vnc=:1" hydevm
+VM_EXTRA_ARGS="-display vnc=:1" pigosvm
 
 # Override QEMU command entirely, provided $VM_DISK will be substituted with the actual disk image
-VM_QEMU_OVERRIDE="qemu-system-x86_64 -m 4G -smp 2 -enable-kvm -drive file=\$VM_DISK,format=qcow2,if=virtio -device virtio-vga -display gtk" hydevm
+VM_QEMU_OVERRIDE="qemu-system-x86_64 -m 4G -smp 2 -enable-kvm -drive file=\$VM_DISK,format=qcow2,if=virtio -device virtio-vga -display gtk" pigosvm
 ```
 
 ## VM Details
@@ -138,9 +138,9 @@ VM_QEMU_OVERRIDE="qemu-system-x86_64 -m 4G -smp 2 -enable-kvm -drive file=\$VM_D
 - **Login**: `arch` / `arch`
 - **SSH Access**: `ssh arch@localhost -p 2222`
 - **Persistence**: Optional flag determines if changes are saved
-- **Cache Directory**: Uses XDG Base Directory specification (`$XDG_CACHE_HOME/hydevm/`)
-- **Snapshots**: Stored in `$XDG_CACHE_HOME/hydevm/snapshots/` (typically `~/.cache/hydevm/snapshots/`)
-- **Base Image**: Cached in `$XDG_CACHE_HOME/hydevm/archbase.qcow2` (typically `~/.cache/hydevm/archbase.qcow2`)
+- **Cache Directory**: Uses XDG Base Directory specification (`$XDG_CACHE_HOME/pigosvm/`)
+- **Snapshots**: Stored in `$XDG_CACHE_HOME/pigosvm/snapshots/` (typically `~/.cache/pigosvm/snapshots/`)
+- **Base Image**: Cached in `$XDG_CACHE_HOME/pigosvm/archbase.qcow2` (typically `~/.cache/pigosvm/archbase.qcow2`)
 
 ## Troubleshooting
 
@@ -162,7 +162,7 @@ virtualisation.libvirtd.enable = true;
 ### Clean Start
 
 ```bash
-hydevm --clean  # Remove all cached data from $XDG_CACHE_HOME/hydevm/
+pigosvm --clean  # Remove all cached data from $XDG_CACHE_HOME/pigosvm/
 ```
 
 ### Killing http server
@@ -175,10 +175,10 @@ pkill -f "python3 -m http.server"
 
 ## VM Host Guide
 
-HyDE uses Hyprland, which has specific requirements for VM environments. Hyprland VM support is limited - see [Hyprland - Running in a VM](https://wiki.hyprland.org/Getting-Started/Installation/#running-in-a-vm) for official guidance.
+PigOS uses Hyprland, which has specific requirements for VM environments. Hyprland VM support is limited - see [Hyprland - Running in a VM](https://wiki.hyprland.org/Getting-Started/Installation/#running-in-a-vm) for official guidance.
 
 > [!NOTE]
-> I'm trying here to make HyDE easier to work with VM's. If you have any suggestions based on your hardware and experience, or find this documentation inaccurate, please let me know.
+> I'm trying here to make PigOS easier to work with VM's. If you have any suggestions based on your hardware and experience, or find this documentation inaccurate, please let me know.
 
 **Key Requirements:**
 
@@ -206,7 +206,7 @@ For non-NixOS hosts, use [nixGL](https://github.com/nix-community/nixGL) for bet
 
 ```bash
 # Install nixGL first, then run HydeVM
-nixGL nix run github:HyDE-Project/HyDE
+nixGL nix run github:PigOS-Project/PigOS
 ```
 
 ### AMD GPU + Any CPU ✅
@@ -234,7 +234,7 @@ modprobe virtio_gpu
 lsmod | grep virtio
 
 # Default QEMU args should work perfectly
-hydevm
+pigosvm
 ```
 
 ### Intel CPU with iGPU ✅
@@ -262,7 +262,7 @@ modprobe virtio_gpu
 lsmod | grep virtio
 
 # Default QEMU args should work perfectly
-hydevm
+pigosvm
 ```
 
 ### NVIDIA GPU + Any CPU ⚠️
@@ -287,7 +287,7 @@ sudo pacman -S qemu-desktop nvidia nvidia-utils
 glxinfo | grep "OpenGL renderer"
 
 # If graphics issues occur, disable GL acceleration
-VM_EXTRA_ARGS="-device virtio-vga -display gtk,gl=off" hydevm
+VM_EXTRA_ARGS="-device virtio-vga -display gtk,gl=off" pigosvm
 ```
 
 Option 2: Nouveau Drivers
@@ -308,14 +308,14 @@ sudo pacman -S qemu-desktop mesa xf86-video-nouveau
 glxinfo | grep "OpenGL renderer"
 
 # Should work with default args
-hydevm
+pigosvm
 ```
 
 Option 3: Software Rendering (Fallback)
 
 ```bash
 # Force software rendering
-VM_EXTRA_ARGS="-device VGA -display gtk,gl=off" hydevm
+VM_EXTRA_ARGS="-device VGA -display gtk,gl=off" pigosvm
 ```
 
 ### Custom QEMU Configuration
@@ -334,7 +334,7 @@ For complete control over QEMU arguments:
 
 ```bash
 # Override entire QEMU command
-VM_QEMU_OVERRIDE="qemu-system-x86_64 -m 4G -smp 2 -enable-kvm -cpu host -machine q35 -device intel-iommu -drive file=\$VM_DISK,format=qcow2,if=virtio -device virtio-vga-gl -display gtk,gl=on,grab-on-hover=on -usb -device usb-tablet -device ich9-intel-hda -device hda-output -vga none" hydevm
+VM_QEMU_OVERRIDE="qemu-system-x86_64 -m 4G -smp 2 -enable-kvm -cpu host -machine q35 -device intel-iommu -drive file=\$VM_DISK,format=qcow2,if=virtio -device virtio-vga-gl -display gtk,gl=on,grab-on-hover=on -usb -device usb-tablet -device ich9-intel-hda -device hda-output -vga none" pigosvm
 
 # The script will substitute $VM_DISK with the appropriate disk image
 ```
@@ -352,10 +352,10 @@ lsmod | grep kvm                       # Should show kvm and kvm_intel/kvm_amd
 glxinfo | grep "OpenGL"               # Should show your GPU and OpenGL 3.3+
 
 # 4. Check dependencies and system info
-hydevm --check-deps
+pigosvm --check-deps
 
 # 5. If issues occur, try software rendering
-VM_EXTRA_ARGS="-device VGA -display gtk,gl=off" hydevm
+VM_EXTRA_ARGS="-device VGA -display gtk,gl=off" pigosvm
 ```
 
 ### Troubleshooting Hyprland in VM
@@ -365,7 +365,7 @@ If you encounter issues with Hyprland in the VM:
 1. **Graphics Issues**: Try disabling GL acceleration
 
    ```bash
-   VM_EXTRA_ARGS="-device virtio-vga -display gtk,gl=off" hydevm
+   VM_EXTRA_ARGS="-device virtio-vga -display gtk,gl=off" pigosvm
    ```
 
 2. **Input Issues**: Ensure USB tablet is enabled (included in enhanced config)

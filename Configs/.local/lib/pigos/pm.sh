@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 # This is a modified version of Copied from https://github.com/jpikl/pm?tab=MIT-1-ov-file
-# This will become a core lib for HyDE to resolve package manager dependencies
+# This will become a core lib for PigOS to resolve package manager dependencies
 
 # Contributor Notice:
 # 1. Feel free to optimize this script
@@ -9,8 +9,8 @@
 # 3. Feel free to add more package managers
 # 4. Feel free to add more package manager commands
 
-# HyDE Notice:
-# We are using this script via ` hyde-shell pm <command> <package> `
+# PigOS Notice:
+# We are using this script via ` pigos-shell pm <command> <package> `
 
 # MIT License
 

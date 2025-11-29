@@ -1,8 +1,8 @@
 # Hi! 👋 Khing here
 
-[![de](https://img.shields.io/badge/lang-de-black.svg)](Source/docs/Hyprdots-to-HyDE.de.md)
-[![中文](https://img.shields.io/badge/lang-中文-orange.svg)](Source/docs/Hyprdots-to-HyDE.zh.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](Source/docs/Hyprdots-to-HyDE.es.md)
+[![de](https://img.shields.io/badge/lang-de-black.svg)](Source/docs/Hyprdots-to-PigOS.de.md)
+[![中文](https://img.shields.io/badge/lang-中文-orange.svg)](Source/docs/Hyprdots-to-PigOS.zh.md)
+[![es](https://img.shields.io/badge/lang-es-yellow.svg)](Source/docs/Hyprdots-to-PigOS.es.md)
 
 ## This fork will enhance and fix prasanthrangan/hyprdots over time
 
@@ -17,7 +17,7 @@
 
 ### Who are the $USER?
 
-> **NOTE**: If you're confused why every `install.sh -r` overwrites your configs, you should fork [HyDE](https://github.com/HyDE-Project/HyDE), edit the `*.lst` file, and run the script. That’s the intended way.
+> **NOTE**: If you're confused why every `install.sh -r` overwrites your configs, you should fork [PigOS](https://github.com/PigOS-Project/PigOS), edit the `*.lst` file, and run the script. That’s the intended way.
 
 Who are the $USER?
 
@@ -32,7 +32,7 @@ Who are the $USER?
 
 - [ ] **Portable**
 
-  - [ ] HyDE-specific files should be imported into $USER, not the other way around
+  - [ ] PigOS-specific files should be imported into $USER, not the other way around
   - [x] Keep it minimal
   - [ ] Make it packageable
   - [x] Follow XDG specs
@@ -40,7 +40,7 @@ Who are the $USER?
 
 - [ ] **Extensible**
 
-  - [ ] Add HyDE extension system
+  - [ ] Add PigOS extension system
   - [ ] Predictable installation
 
 - [ ] **Performance**
@@ -51,7 +51,7 @@ Who are the $USER?
 - [ ] **Manageable**
 
   - [ ] Fix scripts (shellcheck compatible)
-  - [x] Move scripts to `./lib/hyde`
+  - [x] Move scripts to `./lib/pigos`
   - [x] Make `wallbash*.sh` scripts monolithic, to fix wallbash issues
 
 - [ ] **Better Abstraction**
@@ -66,11 +66,11 @@ Who are the $USER?
 
 ---
 
-Here's how we can update HyDE-specific Hyprland settings without changing user preferences. We don't need the "userprefs" file. Instead, we can source HyDE's `hyprland.conf` and make $USER preferred changes directly in the config. With this approach, won't potentially break hyde and hyde won't break your own dots.
+Here's how we can update PigOS-specific Hyprland settings without changing user preferences. We don't need the "userprefs" file. Instead, we can source PigOS's `hyprland.conf` and make $USER preferred changes directly in the config. With this approach, won't potentially break pigos and pigos won't break your own dots.
 
 ![Hyprland structure](https://github.com/user-attachments/assets/91b35c2e-0003-458f-ab58-18fc29541268)
 
-# Why name it HyDE?
+# Why name it PigOS?
 
 As the last man standing collaborator, I don't know what the original creator intended. But I think it's a good name. I just don't know what it stands for. 🤷‍♂️
 
@@ -83,4 +83,4 @@ Here are the speculations from some of the contributors:
 
 > - "HyDE, your Development Environment" - khing
 
-**Feel free to suggest your own meaning of HyDE. 🤔**
+**Feel free to suggest your own meaning of PigOS. 🤔**

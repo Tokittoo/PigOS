@@ -14,7 +14,7 @@ dock=${BATTERY_NOTIFY_DOCK:-false}
 config_info() {
     cat <<EOF
 
-Modify '$XDG_CONFIG_HOME/hyde/config.toml'  to set options.
+Modify '$XDG_CONFIG_HOME/pigos/config.toml'  to set options.
 
       STATUS      THRESHOLD    INTERVAL
       Full        $battery_full_threshold          $notify Minutes
@@ -54,14 +54,14 @@ fn_percentage() {
     if [[ "$battery_percentage" -ge "$unplug_charger_threshold" ]] && [[ "$battery_status" != "Discharging" ]] && [[ "$battery_status" != "Full" ]] && (((battery_percentage - last_notified_percentage) >= interval)); then
         steps=$(printf "%03d" $(((battery_percentage + 5) / 10 * 10)))
         if $verbose; then echo "Prompt:UNPLUG: $unplug_charger_threshold $battery_status $battery_percentage $steps"; fi
-        notify-send -a "HyDE Power" -t 5000 -r 5 -u "CRITICAL" -i "battery-${steps:-100}-charging" "Battery Charged" "Battery is at $battery_percentage%. You can unplug the charger"
+        notify-send -a "PigOS Power" -t 5000 -r 5 -u "CRITICAL" -i "battery-${steps:-100}-charging" "Battery Charged" "Battery is at $battery_percentage%. You can unplug the charger"
         last_notified_percentage=$battery_percentage
     elif [[ "$battery_percentage" -le "$battery_critical_threshold" ]]; then
         count=$((timer > mnt ? timer : mnt)) # reset count
         while [ $count -gt 0 ] && [[ $battery_status == "Discharging"* ]]; do
             for battery in /sys/class/power_supply/BAT*; do battery_status=$(<"$battery/status"); done
             if [[ $battery_status != "Discharging" ]]; then break; fi
-            notify-send -a "HyDE Power" -t 5000 -r 5 -u "CRITICAL" -i "xfce4-battery-critical" "Battery Critically Low" "$battery_percentage% is critically low. Device will execute $execute_critical in $((count / 60)):$((count % 60)) ."
+            notify-send -a "PigOS Power" -t 5000 -r 5 -u "CRITICAL" -i "xfce4-battery-critical" "Battery Critically Low" "$battery_percentage% is critically low. Device will execute $execute_critical in $((count / 60)):$((count % 60)) ."
             count=$((count - 1))
             sleep 1
         done
@@ -69,7 +69,7 @@ fn_percentage() {
     elif [[ "$battery_percentage" -le "$battery_low_threshold" ]] && [[ "$battery_status" == "Discharging" ]] && (((last_notified_percentage - battery_percentage) >= interval)); then
         steps=$(printf "%1d" $(((battery_percentage + 5) / 10 * 10)))
         if $verbose; then echo "Prompt:LOW: $battery_low_threshold $battery_status $battery_percentage"; fi
-        notify-send -a "HyDE Power" -t 5000 -r 5 -u "CRITICAL" -i "battery-level-${steps:-10}-symbolic" "Battery Low" "Battery is at $battery_percentage%. Connect the charger."
+        notify-send -a "PigOS Power" -t 5000 -r 5 -u "CRITICAL" -i "battery-level-${steps:-10}-symbolic" "Battery Low" "Battery is at $battery_percentage%. Connect the charger."
         last_notified_percentage=$battery_percentage
     fi
 }
@@ -91,7 +91,7 @@ fn_status() {
             prev_status=$battery_status
             urgency=$([[ $battery_percentage -le "$battery_low_threshold" ]] && echo "CRITICAL" || echo "NORMAL")
             steps=$(printf "%1d" $(((battery_percentage + 5) / 10 * 10)))
-            notify-send -a "HyDE Power" -t 5000 -r 5 -u "${urgency:-normal}" -i "battery-level-${steps:-10}-symbolic" "Charger Plug Out" "Battery is at $battery_percentage%."
+            notify-send -a "PigOS Power" -t 5000 -r 5 -u "${urgency:-normal}" -i "battery-level-${steps:-10}-symbolic" "Charger Plug Out" "Battery is at $battery_percentage%."
             $execute_discharging
         fi
         fn_percentage
@@ -103,7 +103,7 @@ fn_status() {
             count=$((timer > mnt ? timer : mnt)) # reset count
             urgency=$([[ "$battery_percentage" -ge $unplug_charger_threshold ]] && echo "CRITICAL" || echo "NORMAL")
             steps=$(printf "%03d" $(((battery_percentage + 5) / 10 * 10)))
-            notify-send -a "HyDE Power" -t 5000 -r 5 -u "${urgency:-normal}" -i "battery-${steps:-100}-charging" "Charger Plug In" "Battery is at $battery_percentage%."
+            notify-send -a "PigOS Power" -t 5000 -r 5 -u "${urgency:-normal}" -i "battery-${steps:-100}-charging" "Charger Plug In" "Battery is at $battery_percentage%."
             $execute_charging
         fi
         fn_percentage
@@ -113,16 +113,16 @@ fn_status() {
         if [[ $battery_status != "Discharging" ]]; then
             now=$(date +%s)
             if [[ "$prev_status" == *"harging"* ]] || ((now - lt >= $((notify * 60)))); then
-                notify-send -a "HyDE Power" -t 5000 -r 5 -u "CRITICAL" -i "battery-full-charging-symbolic" "Battery Full" "Please unplug your Charger"
+                notify-send -a "PigOS Power" -t 5000 -r 5 -u "CRITICAL" -i "battery-full-charging-symbolic" "Battery Full" "Please unplug your Charger"
                 prev_status=$battery_status lt=$now
                 $execute_charging
             fi
         fi
         ;;
     *)
-        if [[ ! -f "/tmp/hyde.battery.notify.status.fallback.$battery_status-$$" ]]; then
-            echo "Status: '==>> \"${battery_status}\" <<==' Script on Fallback mode,Unknown power supply status.Please copy this line and raise an issue to the Github Repo.Also run 'ls /tmp/hyde.battery.notify' to see the list of lock files.*"
-            touch "/tmp/hyde.battery.notify.status.fallback.$battery_status-$$"
+        if [[ ! -f "/tmp/pigos.battery.notify.status.fallback.$battery_status-$$" ]]; then
+            echo "Status: '==>> \"${battery_status}\" <<==' Script on Fallback mode,Unknown power supply status.Please copy this line and raise an issue to the Github Repo.Also run 'ls /tmp/pigos.battery.notify' to see the list of lock files.*"
+            touch "/tmp/pigos.battery.notify.status.fallback.$battery_status-$$"
         fi
         fn_percentage
         ;;
@@ -166,7 +166,7 @@ fn_status_change() { # Handle when status changes
 # resume_processes() { for pid in $pids ; do  if [ "$pid" -ne "$current_pid" ] ; then kill -CONT $pid ; notify-send -a "Battery Notify" -t 2000 -r 9889 -u "CRITICAL" "Debugging ENDED, Resuming Regular Process" ; fi ; done }
 
 main() {                                           # Main function
-    rm -fr "$XDG_RUNTIME_DIR/hyde/battery.notify"* # Cleaning the lock file
+    rm -fr "$XDG_RUNTIME_DIR/pigos/battery.notify"* # Cleaning the lock file
     battery_full_threshold=${BATTERY_NOTIFY_THRESHOLD_FULL:-100}
     battery_critical_threshold=${BATTERY_NOTIFY_THRESHOLD_CRITICAL:-5}
     unplug_charger_threshold=${BATTERY_NOTIFY_THRESHOLD_UNPLUG:-80}

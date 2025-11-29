@@ -1,12 +1,12 @@
 <div align = center>
     <a href="https://discord.gg/AYbJ9MJez7">
-<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20HyDe%20Project&labelColor=ebbcba&color=c79bf0">
+<img alt="Dynamic JSON Badge" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fdiscordapp.com%2Fapi%2Finvites%2FmT5YqjaJFh%3Fwith_counts%3Dtrue&query=%24.approximate_member_count&suffix=%20members&style=for-the-badge&logo=discord&logoSize=auto&label=The%20PigOS%20Project&labelColor=ebbcba&color=c79bf0">
     </a>
 </div>
 
 ###### _<div align="right"><a id=-design-by-t2></a><sub>// design by t2</sub></div>_
 
-![hyde_banner](Source/assets/hyde_banner.png)
+![pigos_banner](Source/assets/pigos_banner.png)
 
 <!--
 Multi-language KEYBINDINGS support
@@ -25,7 +25,7 @@ Multi-language KEYBINDINGS support
 
 <br>
 
-<!-- <a href=#hyde-keybindings><kbd> <br> HyDE keybindings <br> </kbd></a>&ensp;&ensp; -->
+<!-- <a href=#pigos-keybindings><kbd> <br> PigOS keybindings <br> </kbd></a>&ensp;&ensp; -->
 
 <a href=#window-management><kbd> <br> Window Management <br> </kbd></a>&ensp;&ensp;
 <a href=#misc><kbd> <br> Misc <br> </kbd></a>&ensp;&ensp;
@@ -47,10 +47,10 @@ Multi-language KEYBINDINGS support
   </div>
 </div>
 
-<!-- # <a id=hyde-keybindings>HyDE Keybindings</a> -->
-<!-- # <a id=hyde-keybindings></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=HyDE%20Keybindings" width="450"/> -->
+<!-- # <a id=pigos-keybindings>PigOS Keybindings</a> -->
+<!-- # <a id=pigos-keybindings></a><img src="https://readme-typing-svg.herokuapp.com?font=Lexend+Giga&size=25&pause=1000&color=CCA9DD&width=435&lines=PigOS%20Keybindings" width="450"/> -->
 
-Here are all HyDE specific keybindings listed.
+Here are all PigOS specific keybindings listed.
 
 > [!TIP]  
 > <kbd>Super</kbd> + <kbd>/</kbd> shows the keybindings.
@@ -295,10 +295,10 @@ You can define your own keybindings by editing your preferences file at:
 ~/.config/hypr/userprefs.conf
 ```
 
-For example, to create a keybinding that launches the **HyDE Game Launcher**, add the following line:
+For example, to create a keybinding that launches the **PigOS Game Launcher**, add the following line:
 
 ```ini
-bind = $mainMod, SPACE, exec, $HOME/.local/lib/hyde/gamelauncher.sh
+bind = $mainMod, SPACE, exec, $HOME/.local/lib/pigos/gamelauncher.sh
 ```
 
 This will bind the **Game Launcher** to <kbd>SUPER</kbd> + <kbd>Space</kbd>.  
@@ -307,7 +307,7 @@ You can replace `SPACE` with any other key you prefer.
 The `gamelauncher.sh` script is included by default and lives at:
 
 ```bash
-~/.local/lib/hyde/gamelauncher.sh
+~/.local/lib/pigos/gamelauncher.sh
 ```
 
 <!--
